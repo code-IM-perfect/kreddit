@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Kreddit
+Name[x-test]=xxKredditxx
+Exec=kreddit
+Icon=kde
+Type=Application
+Terminal=false
+Categories=Utility
+

@@ -1,0 +1,6 @@
+.cache/
+
+.clangd
+compile_commands.json
+
+*.qmlls.ini
