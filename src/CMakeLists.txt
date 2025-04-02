@@ -8,6 +8,7 @@ ecm_add_qml_module(kreddit
 target_sources(kreddit
     PRIVATE
     main.cpp
+    api/redditmodel.cpp api/redditmodel.h
 )
 
 ecm_target_qml_sources(kreddit
@@ -26,6 +27,9 @@ target_link_libraries(kreddit
     KF6::CoreAddons
     KF6::IconThemes
     kreddit-ui
+
+    Qt6::Network
+    Qt6::NetworkAuth
 )
 
 install(TARGETS kreddit ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

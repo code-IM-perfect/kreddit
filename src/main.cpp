@@ -1,3 +1,5 @@
+#include "api/redditmodel.h"
+
 #include <KAboutData>
 #include <KIconTheme>
 #include <KLocalizedContext>
@@ -11,10 +13,14 @@
 #include <kuitsetup.h>
 #include <qapplication.h>
 #include <qcoreapplication.h>
+#include <qqml.h>
 #include <qqmlapplicationengine.h>
 #include <qquickstyle.h>
 #include <qstringliteral.h>
 #include <qtenvironmentvariables.h>
+
+using namespace Qt::StringLiterals;
+// TODO: Convert other QStringLiterals to _L1 for consistancy
 
 int main(int argc, char *argv[])
 {
@@ -23,10 +29,10 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     KLocalizedString::setApplicationDomain("kreddit");
-    QApplication::setOrganizationName(QStringLiteral("KDE"));
-    QApplication::setOrganizationDomain(QStringLiteral("kde.org"));
-    QApplication::setApplicationName(QStringLiteral("Kreddit"));
-    QApplication::setDesktopFileName(QStringLiteral("org.kde.kreddit"));
+    QApplication::setOrganizationName("KDE"_L1);
+    QApplication::setOrganizationDomain("kde.org"_L1);
+    QApplication::setApplicationName("Kreddit"_L1);
+    QApplication::setDesktopFileName("org.kde.kreddit"_L1);
 
     QApplication::setStyle(QStringLiteral("breeze"));
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
@@ -57,6 +63,9 @@ int main(int argc, char *argv[])
                                  // to turn it into a QML type
                                  return engine->toScriptValue(KAboutData::applicationData());
                              });
+
+    // static constexpr auto hotUrl = "https://oauth.reddit.com/hot"_L1;
+    qmlRegisterType<RedditModel>("RedditModel", 1, 0, "RedditModel");
 
     QQmlApplicationEngine engine;
 

@@ -4,6 +4,8 @@ import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 import org.kde.kreddit.components
 
+import RedditModel 1.0
+
 Kirigami.ApplicationWindow {
     id: root
 
@@ -11,6 +13,10 @@ Kirigami.ApplicationWindow {
     height: 600
 
     title: i18nc("@title:window", "Kreddit - Reddit Viewer")
+
+    RedditModel {
+        id: redditMainPageModel
+    }
 
     globalDrawer: Kirigami.GlobalDrawer {
         id: subredditDrawer
@@ -50,6 +56,18 @@ Kirigami.ApplicationWindow {
         //     model: postModel
         //     delegate: PostDelegate {}
         // }
+
+        ColumnLayout {
+            Repeater {
+                model: redditMainPageModel
+                delegate: Kirigami.AbstractCard {
+                    header: Kirigami.Heading {
+                        text: model.title
+                        level: 2
+                    }
+                }
+            }
+        }
 
         actions: [
             Kirigami.Action {
