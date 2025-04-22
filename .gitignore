@@ -1,4 +1,6 @@
 .cache/
+.vscode/
+build/
 
 .clangd
 compile_commands.json
