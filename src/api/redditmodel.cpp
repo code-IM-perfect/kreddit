@@ -42,6 +42,11 @@ QHash<int, QByteArray> RedditModel::roleNames() const
     };
 }
 
+void RedditModel::requestUrlChanged()
+{
+    return;
+}
+
 qint64 RedditModel::getTokenExpiry() const
 {
     int expiresIn;
@@ -93,7 +98,7 @@ RedditModel::RedditModel(QObject *parent)
     network = new QRestAccessManager(qnam, qnam);
 
     // set request url
-    redditApi.setBaseUrl(QUrl(requestUrl));
+    redditApi.setBaseUrl(QUrl(requestUrl()));
 
     auto replyHandler = new QOAuthHttpServerReplyHandler(QHostAddress::Any, 1337, this);
     oauth2.setReplyHandler(replyHandler);

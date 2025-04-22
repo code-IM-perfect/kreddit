@@ -9,12 +9,14 @@
 #include <QtCore/qpointer.h>
 #include <qcontainerfwd.h>
 #include <qnamespace.h>
+#include <qtmetamacros.h>
 
 QT_FORWARD_DECLARE_CLASS(QRestAccessManager)
 
 class RedditModel : public QAbstractTableModel
 {
     Q_OBJECT
+    Q_PROPERTY(QString requestUrl READ requestUrl WRITE setRequestUrl NOTIFY requestUrlChanged)
 
 public:
     RedditModel(QObject *parent = nullptr);
@@ -43,14 +45,29 @@ public:
     // signals:
     void error(const QString &errorString);
     void onGranted();
+    void requestUrlChanged();
 
     void updateposts();
 
-    QString requestUrl = QLatin1String("https://oauth.reddit.com/hot?limit=200&sr_detail=1");
+    // REQUEST URL
+    void setRequestUrl(const QString &url)
+    {
+        if (url != m_requestUrl) {
+            m_requestUrl = url;
+            Q_EMIT requestUrlChanged();
+        }
+    }
+    QString requestUrl() const
+    {
+        return m_requestUrl;
+    }
+
 
     void getToken();
 
 private:
+    QString m_requestUrl = QLatin1String("https://oauth.reddit.com/hot?limit=200&sr_detail=1");
+
     qint64 getTokenExpiry() const;
 
     // Init Network
