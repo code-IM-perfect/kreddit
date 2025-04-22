@@ -17,7 +17,6 @@ class RedditModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    // RedditModel(QObject *parent = nullptr);
     RedditModel(QObject *parent = nullptr);
 
     enum Roles {
@@ -49,7 +48,7 @@ public:
 
     QString requestUrl = QLatin1String("https://oauth.reddit.com/hot?limit=200&sr_detail=1");
 
-    void getToken(const QString &reqUrl);
+    void getToken();
 
 private:
     qint64 getTokenExpiry() const;

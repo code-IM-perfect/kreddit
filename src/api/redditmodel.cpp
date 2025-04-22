@@ -55,12 +55,8 @@ qint64 RedditModel::getTokenExpiry() const
     return (QDateTime::currentSecsSinceEpoch() + expiresIn);
 }
 
-void RedditModel::getToken(const QString &reqUrl)
+void RedditModel::getToken()
 {
-    if (!reqUrl.isEmpty()) {
-        requestUrl = reqUrl;
-    }
-
     // TODO: Save and Fetch from QSettings
     QSettings settings;
 
@@ -119,8 +115,7 @@ RedditModel::RedditModel(QObject *parent)
     QObject::connect(&oauth2, &QAbstractOAuth::granted, this, &RedditModel::onGranted);
     connect(&oauth2, &QOAuth2AuthorizationCodeFlow::authorizeWithBrowser, this, &QDesktopServices::openUrl);
 
-    getToken(requestUrl);
-    // oauth2.grant();
+    getToken();
 }
 
 void RedditModel::onGranted()
