@@ -10,8 +10,10 @@
 #include <QtCore/qjsonarray.h>
 #include <QtCore/qjsondocument.h>
 #include <qassert.h>
+#include <qcontainerfwd.h>
 #include <qlogging.h>
 #include <qnamespace.h>
+#include <qset.h>
 #include <qsettings.h>
 #include <qstringliteral.h>
 #include <qtmetamacros.h>
@@ -21,7 +23,6 @@ using namespace Qt::StringLiterals;
 static constexpr auto clientId = "nGnecoqXrZOzaxkqlO0Vtw"_L1;
 static constexpr auto authorizationUrl = "https://www.reddit.com/api/v1/authorize"_L1;
 static constexpr auto accessTokenUrl = "https://www.reddit.com/api/v1/access_token"_L1;
-static constexpr auto scope = "identity read"_L1;
 
 QHash<int, QByteArray> RedditModel::roleNames() const
 {
@@ -80,7 +81,7 @@ void RedditModel::getToken(const QString &reqUrl)
         qDebug() << "Access token expired but refresh token found, starting token refresh.";
         newExpiry = true;
         oauth2.setRefreshToken(refreshToken);
-        oauth2.refreshAccessToken();
+        oauth2.refreshTokens();
         return;
     }
 
@@ -101,9 +102,10 @@ RedditModel::RedditModel(QObject *parent)
     auto replyHandler = new QOAuthHttpServerReplyHandler(QHostAddress::Any, 1337, this);
     oauth2.setReplyHandler(replyHandler);
     oauth2.setAuthorizationUrl(QUrl(authorizationUrl));
-    oauth2.setAccessTokenUrl(QUrl(accessTokenUrl));
-    oauth2.setScope(scope);
+    oauth2.setTokenUrl(QUrl(accessTokenUrl));
     oauth2.setClientIdentifier(clientId);
+    const QSet<QByteArray> scope = {QByteArray("identity"), QByteArray("read")};
+    oauth2.setRequestedScopeTokens(scope);
 
     // oauth2.setModifyParametersFunction([](QAbstractOAuth::Stage stage, QMultiMap<QString, QVariant> *parameters) {
     //     if (!parameters)
