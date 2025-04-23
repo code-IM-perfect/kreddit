@@ -208,6 +208,11 @@ QVariant RedditModel::data(const QModelIndex &index, int role) const
         const auto firstImage = imagesArray.first().toObject();
         return firstImage.value("source"_L1).toObject().value("url"_L1).toString();
     }
+    case SubredditIconRole: {
+        Q_ASSERT(dataObject.value("sr_detail"_L1).isObject());
+        const auto srDetails = dataObject.value("sr_detail"_L1).toObject();
+        return srDetails.value("icon_img"_L1).toString();
+    }
     case UrlRole: {
         // TODO: Handle video and gallery pages
         if (dataObject.value("url"_L1).toString().isEmpty()) {
