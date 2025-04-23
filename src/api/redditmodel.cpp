@@ -183,12 +183,12 @@ QVariant RedditModel::data(const QModelIndex &index, int role) const
         return dataObject.value("selftext"_L1).toString();
     case TypeRole: {
         const auto domain = dataObject.value("domain"_L1).toString();
-        if (QString::compare(domain, "i.redd.it"_L1)) {
+        if (!QString::compare(domain, "i.redd.it"_L1)) {
             if (dataObject.value("url"_L1).toString().endsWith(".gif"_L1)) {
                 return "gif"_L1;
             }
             return "image"_L1;
-        } else if (QString::compare(domain, "v.redd.it"_L1)) {
+        } else if (!QString::compare(domain, "v.redd.it"_L1)) {
             return "video"_L1;
         } else if (QString::compare(domain, "reddit.com"_L1)) {
             return "image_gallery"_L1;
