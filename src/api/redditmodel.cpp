@@ -229,6 +229,9 @@ void RedditModel::updateposts()
         if (!reply.isSuccess()) {
             // Q_EMIT error(reply.errorString());
             qDebug() << "Request to Reddit API failed";
+
+            qDebug() << "Retrying...";
+            oauth2.grant();
             return;
         }
         const auto document = reply.readJson();
