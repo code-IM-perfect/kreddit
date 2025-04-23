@@ -5,11 +5,10 @@ ecm_add_qml_module(kreddit-ui
     GENERATE_PLUGIN_SOURCE
 )
 
-# ecm_target_qml_sources(kreddit-ui
-#     SOURCES
-#     AddDialog.qml
-#     KountdownDelegate.qml
-# )
+ecm_target_qml_sources(kreddit-ui
+    SOURCES
+    PostDelegate.qml
+)
 
 ecm_finalize_qml_module(kreddit-ui)
 

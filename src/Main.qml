@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
-import org.kde.kreddit.components
+import org.kde.kreddit.ui
 
 import RedditModel 1.0
 
@@ -60,11 +60,8 @@ Kirigami.ApplicationWindow {
         ColumnLayout {
             Repeater {
                 model: redditMainPageModel
-                delegate: Kirigami.AbstractCard {
-                    header: Kirigami.Heading {
-                        text: model.title
-                        level: 2
-                    }
+                delegate: PostDelegate {
+                    id: postDelegate
                 }
             }
         }
