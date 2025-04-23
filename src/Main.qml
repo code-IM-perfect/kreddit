@@ -15,7 +15,8 @@ Kirigami.ApplicationWindow {
     title: i18nc("@title:window", "Kreddit - Reddit Viewer")
 
     RedditModel {
-        id: redditMainPageModel
+        id: mainPageModel
+        requestUrl: "https://oauth.reddit.com/hot?limit=200&sr_detail=1"
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
@@ -58,8 +59,10 @@ Kirigami.ApplicationWindow {
         // }
 
         ColumnLayout {
+            // Layout.maximumWidth: Screen.width / 2
+            // anchors.centerIn: parent
             Repeater {
-                model: redditMainPageModel
+                model: mainPageModel
                 delegate: PostDelegate {
                     id: postDelegate
                 }
