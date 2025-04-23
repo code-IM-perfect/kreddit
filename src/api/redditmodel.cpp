@@ -165,17 +165,18 @@ QVariant RedditModel::data(const QModelIndex &index, int role) const
     case IdRole:
         return dataObject.value("id"_L1).toString();
     case TitleRole:
+        // qDebug() << dataObject;
         return dataObject.value("title"_L1).toString();
     case SubRedditRole:
         return dataObject.value("subreddit_name_prefixed"_L1).toString();
     case AuthorRole:
         return dataObject.value("author"_L1).toString();
     case ScoreRole:
-        return dataObject.value("score"_L1).toString();
+        return dataObject.value("score"_L1).toInt();
     case CreationTimeRole:
-        return dataObject.value("created"_L1).toString();
+        return dataObject.value("created"_L1).toInt();
     case NumCommentsRole:
-        return dataObject.value("num_comments"_L1).toString();
+        return dataObject.value("num_comments"_L1).toInt();
     case PermalinkRole:
         return dataObject.value("permalink"_L1).toString();
     case SelfTextRole:
