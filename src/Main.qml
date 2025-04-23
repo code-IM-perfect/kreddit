@@ -22,7 +22,7 @@ Kirigami.ApplicationWindow {
         id: subredditDrawer
         modal: false
         collapsible: true
-        collapsed: false
+        collapsed: true
 
         actions: [
             Kirigami.Action {
