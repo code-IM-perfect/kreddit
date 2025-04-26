@@ -17,6 +17,7 @@ class RedditModel : public QAbstractTableModel
 {
     Q_OBJECT
     Q_PROPERTY(QString requestUrl READ requestUrl WRITE setRequestUrl NOTIFY requestUrlChanged)
+    Q_PROPERTY(int authStatus READ authStatus WRITE setAuthStatus NOTIFY authStatusChanged)
 
 public:
     RedditModel(QObject *parent = nullptr);
@@ -46,6 +47,7 @@ public:
     void error(const QString &errorString);
     void onGranted();
     void requestUrlChanged();
+    void authStatusChanged();
 
     void updateposts();
 
@@ -62,11 +64,24 @@ public:
         return m_requestUrl;
     }
 
+    // AUTH STATUS
+    void setAuthStatus(const int status)
+    {
+        if (status != m_authStatus) {
+            m_authStatus = status;
+            Q_EMIT authStatusChanged();
+        }
+    }
+    int authStatus() const
+    {
+        return m_authStatus;
+    }
 
     void getToken();
 
 private:
     QString m_requestUrl = QLatin1String("https://oauth.reddit.com/hot?limit=200&sr_detail=1");
+    int m_authStatus;
 
     qint64 getTokenExpiry() const;
 

@@ -47,6 +47,11 @@ void RedditModel::requestUrlChanged()
     return;
 }
 
+void RedditModel::authStatusChanged()
+{
+    return;
+}
+
 qint64 RedditModel::getTokenExpiry() const
 {
     int expiresIn;
