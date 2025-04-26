@@ -60,7 +60,6 @@ Kirigami.ApplicationWindow {
 
         ColumnLayout {
             // Layout.maximumWidth: Screen.width / 2
-            // anchors.centerIn: parent
             Repeater {
                 model: mainPageModel
                 delegate: PostDelegate {
