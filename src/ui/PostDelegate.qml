@@ -4,6 +4,7 @@ import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 
 Kirigami.Card {
+    id: postCard
     header: ColumnLayout {
         RowLayout {
             Kirigami.Icon {

@@ -59,8 +59,10 @@ Kirigami.ApplicationWindow {
         // }
 
         ColumnLayout {
-            // Layout.maximumWidth: Screen.width / 2
+            // Layout.alignment: Qt.AlignHCenter
+            // Layout.preferredWidth: postRepeater.width
             Repeater {
+                id: postRepeater
                 model: mainPageModel
                 delegate: PostDelegate {
                     id: postDelegate
