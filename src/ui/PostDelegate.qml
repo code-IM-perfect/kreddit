@@ -69,6 +69,7 @@ Kirigami.AbstractCard {
             Controls.Button {
                 id: upvote
                 icon.name: "go-up-symbolic"
+                // TODO: Implement Logic
             }
             Controls.Label {
                 text: model.score
@@ -76,17 +77,20 @@ Kirigami.AbstractCard {
             Controls.Button {
                 id: downvote
                 icon.name: "go-down-symbolic"
+                // TODO: Implement Logic
             }
         }
         Controls.Button {
             id: commentsButton
             icon.name: "dialog-messages"
             text: model.num_comments + " Comments"
+            // TODO: Implement Logic
         }
         Controls.Button {
             id: savePostButton
             icon.name: "bookmarks"
             text: "Add to Saves"
+            // TODO: Implement Logic
         }
     }
 }
