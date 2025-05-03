@@ -39,6 +39,15 @@ Kirigami.AbstractCard {
             text: "score: " + model.score + "\n" + "timestamp: " + model.timestamp + "\n" + "num_comments: " + model.num_comments + "\n" + "permalink: " + model.permalink + "\n" + "self_text: " + model.self_text + "\n" + "type: " + model.type + "\n" + "preview_image: " + model.preview_image + "\n" + "url: " + model.url + "\n" + "subreddit_icon: " + model.subreddit_icon
             wrapMode: Text.WordWrap
         }
+        Image {
+            id: postPreview
+            // TODO: Implement as Loader
+            visible: model.type == "image"
+            source: model.url
+            sourceSize.height: Screen.height / 2.4
+            Layout.preferredHeight: sourceSize.height
+            Layout.alignment: Qt.AlignHCenter
+        }
         Controls.Label {
             text: "ScreenWidth: " + Screen.width + "\n" + "ParentWidth: " + parent.width + "\n" + "Width: " + width + "\n"
         }
