@@ -25,6 +25,7 @@ Kirigami.AbstractCard {
                 text: new Date(model.timestamp * 1000).toLocaleString(Qt.locale(), Locale.ShortFormat)
             }
             Controls.Label {
+                Layout.alignment: Qt.AlignRight
                 text: model.type
             }
         }
