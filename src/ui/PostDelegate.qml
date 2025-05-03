@@ -36,9 +36,14 @@ Kirigami.AbstractCard {
         }
         Controls.Label {
             Layout.fillWidth: true
-            text: "score: " + model.score + "\n" + "timestamp: " + model.timestamp + "\n" + "num_comments: " + model.num_comments + "\n" + "permalink: " + model.permalink + "\n" + "self_text: " + model.self_text + "\n" + "type: " + model.type + "\n" + "preview_image: " + model.preview_image + "\n" + "url: " + model.url + "\n" + "subreddit_icon: " + model.subreddit_icon
+            text: "permalink: " + model.permalink + "\n" + "self_text: " + model.self_text + "\n" + "preview_image: " + model.preview_image + "\n" + "url: " + model.url
             wrapMode: Text.WordWrap
+            readOnly: true
+            selectByMouse: true
         }
+        // Controls.Label {
+        //     text: "ScreenWidth: " + Screen.width + "\n" + "HeaderWidth: " + postCard.header.width + "\n" + "PostCardWidth: " + postCard.width + "\n"
+        // }
         Image {
             id: postPreview
             // TODO: Implement as Loader
