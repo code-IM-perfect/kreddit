@@ -75,7 +75,7 @@ void RedditModel::getToken()
     qint64 expiryTime = settings.value("expiryTime").toLongLong();
 
     if (!accessToken.isEmpty() && QDateTime::currentSecsSinceEpoch() < expiryTime) {
-        qDebug() << "Access Token is still valid, continuing with it";
+        qDebug() << "Access Token is still valid, continuing without it";
         oauth2.setToken(accessToken);
 
         // Emit granted() to trigger onGranted()
