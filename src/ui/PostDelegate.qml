@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import org.kde.kirigami as Kirigami
 
-Kirigami.Card {
+Kirigami.AbstractCard {
     id: postCard
     header: ColumnLayout {
         RowLayout {
