@@ -5,6 +5,8 @@ import org.kde.kirigami as Kirigami
 
 Kirigami.AbstractCard {
     id: postCard
+    Layout.maximumWidth: Screen.width / 2.2
+    Layout.alignment: Qt.AlignHCenter
     header: ColumnLayout {
         RowLayout {
             Kirigami.Icon {
