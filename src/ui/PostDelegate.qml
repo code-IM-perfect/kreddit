@@ -34,7 +34,7 @@ Kirigami.AbstractCard {
             level: 2
             wrapMode: Text.WordWrap
         }
-        Controls.Label {
+        TextEdit {
             Layout.fillWidth: true
             text: "permalink: " + model.permalink + "\n" + "self_text: " + model.self_text + "\n" + "preview_image: " + model.preview_image + "\n" + "url: " + model.url
             wrapMode: Text.WordWrap
