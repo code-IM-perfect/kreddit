@@ -92,5 +92,25 @@ Kirigami.AbstractCard {
             text: "Add to Saves"
             // TODO: Implement Logic
         }
+        Kirigami.Action {
+            text: "Share"
+            icon.name: "emblem-shared-symbolic"
+
+            Kirigami.Action {
+                text: "Copy Link to Post"
+                // TODO: Implement Logic
+            }
+            Kirigami.Action {
+                text: "Copy Link to " + model.type
+                visible: model.type == "image" || model.type == "video" || model.type == "gif"
+                // TODO: Implement Logic
+            }
+            Kirigami.Action {
+                text: "Download Image"
+                visible: model.type == "image" || model.type == "gif"
+                // TODO: Implement Logic
+            }
+            // TODO: Implement for other media types
+        }
     }
 }
