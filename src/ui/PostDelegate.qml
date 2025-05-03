@@ -61,15 +61,10 @@ Kirigami.AbstractCard {
     //     //     visible: model.type != "image" && model.type != "gif"
     //     //     text: "Sorry kreddit does not support " + model.type + " yet"
     //     // }
-    //     ColumnLayout {
-    //         anchors.fill: parent
-    //         Controls.Label {
-    //             text: "score: " + model.score + "\n" + "timestamp: " + model.timestamp + "\n" + "num_comments: " + model.num_comments + "\n" + "permalink: " + model.permalink + "\n" + "self_text: " + model.self_text + "\n" + "type: " + model.type + "\n" + "preview_image: " + model.preview_image + "\n" + "url: " + model.url + "\n" + "subreddit_icon: " + model.subreddit_icon
-    //         }
-    //     }
     // }
     contentItem: RowLayout {
-        // Layout.fillHeight: true
+        Layout.fillWidth: true
+        // Layout.alignment: Qt.AlignHCenter
         RowLayout {
             Controls.Button {
                 id: upvote
