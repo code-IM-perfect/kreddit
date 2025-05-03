@@ -113,14 +113,18 @@ RedditModel::RedditModel(QObject *parent)
     const QSet<QByteArray> scope = {QByteArray("identity"), QByteArray("read")};
     oauth2.setRequestedScopeTokens(scope);
 
-    // oauth2.setModifyParametersFunction([](QAbstractOAuth::Stage stage, QMultiMap<QString, QVariant> *parameters) {
-    //     if (!parameters)
-    //         return; // Return if pointer is invalid
-    //
-    //     if (stage == QAbstractOAuth::Stage::RequestingAccessToken) {
-    //         parameters->insert("duration"_L1, "permanent"_L1); // Add custom parameter
-    //     }
-    // });
+    oauth2.setModifyParametersFunction([](QAbstractOAuth::Stage stage, QMultiMap<QString, QVariant> *parameters) {
+        // qDebug() << "trying to modify parameters";
+        if (!parameters) {
+            qDebug() << "modifying parameters failed: could not access parameters";
+            return; // Return if pointer is invalid
+        }
+
+        if (stage == QAbstractOAuth::Stage::RequestingAuthorization) {
+            parameters->insert("duration"_L1, "permanent"_L1); // Add duration parameter
+            qDebug() << "Modified parameters for permanent access";
+        }
+    });
 
     QObject::connect(&oauth2, &QAbstractOAuth::granted, this, &RedditModel::onGranted);
     connect(&oauth2, &QOAuth2AuthorizationCodeFlow::authorizeWithBrowser, this, &QDesktopServices::openUrl);
