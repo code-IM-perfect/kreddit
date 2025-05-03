@@ -138,6 +138,10 @@ void RedditModel::onGranted()
     settings.setValue("accessToken", oauth2.token());
     settings.setValue("refreshToken", oauth2.refreshToken());
 
+    if (oauth2.refreshToken().isEmpty()) {
+        qDebug() << "Access granted but refresh token was not recieved";
+    }
+
     if (newExpiry) {
         settings.setValue("expiryTime", RedditModel::getTokenExpiry());
     }
