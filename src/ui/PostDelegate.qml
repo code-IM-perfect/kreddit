@@ -24,6 +24,9 @@ Kirigami.AbstractCard {
             Controls.Label {
                 text: new Date(model.timestamp * 1000).toLocaleString(Qt.locale(), Locale.ShortFormat)
             }
+            Controls.Label {
+                text: model.type
+            }
         }
         Kirigami.Heading {
             Layout.fillWidth: true
