@@ -89,7 +89,7 @@ Kirigami.AbstractCard {
         Controls.Button {
             id: savePostButton
             icon.name: "bookmarks"
-            text: "Add to Saves"
+            text: "Save"
             // TODO: Implement Logic
         }
         Kirigami.Action {
