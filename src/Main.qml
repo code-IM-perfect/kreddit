@@ -16,7 +16,7 @@ Kirigami.ApplicationWindow {
 
     RedditModel {
         id: mainPageModel
-        requestUrl: "https://oauth.reddit.com/hot?limit=20&sr_detail=1"
+        requestUrl: "https://oauth.reddit.com/hot?limit=20&sr_detail=1&raw_json=1"
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
