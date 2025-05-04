@@ -216,10 +216,15 @@ QVariant RedditModel::data(const QModelIndex &index, int role) const
         const auto previewObject = dataObject.value("preview"_L1).toObject();
         Q_ASSERT(previewObject.value("images"_L1).isArray());
         const auto imagesArray = previewObject.value("images"_L1).toArray();
-        // TODO: Implement Getting fitting resolution Logic
         Q_ASSERT(imagesArray.first().isObject());
+        // TODO: Handle multiple images (image gallery)
         const auto firstImage = imagesArray.first().toObject();
-        return firstImage.value("source"_L1).toObject().value("url"_L1).toString();
+        Q_ASSERT(firstImage.value("resolutions"_L1).isArray());
+        const auto resArray = firstImage.value("resolutions"_L1).toArray();
+        // TODO: Implement Getting fitting resolution Logic
+        Q_ASSERT(resArray.last().isObject());
+        const auto biggestPreview = resArray.last().toObject();
+        return biggestPreview.value("url"_L1).toString();
     }
     case SubredditIconRole: {
         Q_ASSERT(dataObject.value("sr_detail"_L1).isObject());
