@@ -65,37 +65,6 @@ qint64 RedditModel::getTokenExpiry() const
     return (QDateTime::currentSecsSinceEpoch() + expiresIn);
 }
 
-void RedditModel::getToken()
-{
-    // TODO: Save and Fetch from QSettings
-    QSettings settings;
-
-    QString accessToken = settings.value("accessToken").toString();
-    QString refreshToken = settings.value("refreshToken").toString();
-    qint64 expiryTime = settings.value("expiryTime").toLongLong();
-
-    if (!accessToken.isEmpty() && QDateTime::currentSecsSinceEpoch() < expiryTime) {
-        qDebug() << "Access Token is still valid, continuing without it";
-        oauth2.setToken(accessToken);
-
-        // Emit granted() to trigger onGranted()
-        Q_EMIT oauth2.granted();
-        return;
-    }
-
-    if (!refreshToken.isEmpty()) {
-        qDebug() << "Access token expired but refresh token found, starting token refresh.";
-        newExpiry = true;
-        oauth2.setRefreshToken(refreshToken);
-        oauth2.refreshTokens();
-        return;
-    }
-
-    qDebug() << "Could not get stored keys, starting full auth process from the begining";
-    newExpiry = true;
-    oauth2.grant();
-}
-
 RedditModel::RedditModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
@@ -130,6 +99,40 @@ RedditModel::RedditModel(QObject *parent)
     connect(&oauth2, &QOAuth2AuthorizationCodeFlow::authorizeWithBrowser, this, &QDesktopServices::openUrl);
 
     getToken();
+}
+
+void RedditModel::getToken()
+{
+    // TODO: Save and Fetch from QSettings
+    QSettings settings;
+
+    QString accessToken = settings.value("accessToken").toString();
+    QString refreshToken = settings.value("refreshToken").toString();
+    qint64 expiryTime = settings.value("expiryTime").toLongLong();
+
+    if (!accessToken.isEmpty() && QDateTime::currentSecsSinceEpoch() < expiryTime) {
+        qDebug() << "Access Token is still valid, continuing without it";
+        oauth2.setToken(accessToken);
+
+        // Emit granted() to trigger onGranted()
+        Q_EMIT oauth2.granted();
+        return;
+    }
+
+    if (!refreshToken.isEmpty()) {
+        qDebug() << "Access token expired but refresh token found, starting token refresh.";
+        newExpiry = true;
+        oauth2.setRefreshToken(refreshToken);
+        oauth2.refreshTokens();
+
+        Q_EMIT oauth2.granted();
+        return;
+    }
+
+    qDebug() << "Could not get stored keys, starting full auth process from the begining";
+    newExpiry = true;
+    oauth2.grant();
+    return;
 }
 
 void RedditModel::onGranted()
