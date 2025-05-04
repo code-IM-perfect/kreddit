@@ -55,7 +55,9 @@ Kirigami.AbstractCard {
             Layout.alignment: Qt.AlignHCenter
         }
         Controls.Label {
-            text: "ScreenWidth: " + Screen.width + "\n" + "ParentWidth: " + parent.width + "\n" + "Width: " + width + "\n"
+            property int imageProgress: Math.round(postPreview.progress * 20)
+            visible: postPreview.visible && postPreview.progress != Image.Ready
+            text: "Loading Image..."
         }
     }
     // contentItem: Rectangle {
