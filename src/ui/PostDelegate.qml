@@ -49,7 +49,7 @@ Kirigami.AbstractCard {
             id: postPreview
             // TODO: Implement as Loader
             visible: model.type == "image"
-            source: model.url
+            source: model.preview_image
             sourceSize.height: Screen.height / 2.4
             Layout.preferredHeight: sourceSize.height
             Layout.alignment: Qt.AlignHCenter
