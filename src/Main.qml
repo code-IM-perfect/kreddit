@@ -16,7 +16,10 @@ Kirigami.ApplicationWindow {
 
     RedditModel {
         id: mainPageModel
-        requestUrl: "https://oauth.reddit.com/hot?limit=20&sr_detail=1&raw_json=1"
+        // WARN: raw_json not working for some reason
+        requestUrl: "https://oauth.reddit.com/hot?raw_json=1&sr_detail=1&limit=20"
+        // requestUrl: "https://oauth.reddit.com/hot?raw_json=1"
+        // requestUrl: "https://oauth.reddit.com/r/pics/hot?raw_json=1"
     }
 
     globalDrawer: Kirigami.GlobalDrawer {

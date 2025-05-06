@@ -227,7 +227,8 @@ QVariant RedditModel::data(const QModelIndex &index, int role) const
         // TODO: Implement Getting fitting resolution Logic
         Q_ASSERT(resArray.last().isObject());
         const auto biggestPreview = resArray.last().toObject();
-        return biggestPreview.value("url"_L1).toString();
+        // TODO: Add more replacements
+        return biggestPreview.value("url"_L1).toString().replace("&amp;"_L1, "&"_L1);
     }
     case SubredditIconRole: {
         Q_ASSERT(dataObject.value("sr_detail"_L1).isObject());
